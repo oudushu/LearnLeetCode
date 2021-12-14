@@ -8,8 +8,7 @@
 class Solution {
 public:
     int mySqrt(int x) {
-        int left = 0, right = x;
-        int res = 0;
+        int left = 0, right = x, res = 0;
         while (left <= right) {
             int mid = left + (right - left) / 2;
             if ((long long)mid * mid <= x) {
