@@ -8,14 +8,16 @@
 class Solution {
 public:
     bool canConstruct(string ransomNote, string magazine) {
-        if (ransomNote.size() > magazine.size()) return false;
+        if (ransomNote.size() > magazine.size()) {
+            return false;
+        }
         map<char, int> myMap;
         for (char ch : magazine) {
-            ++ myMap[ch];
+            myMap[ch] ++;
         }
         for (char ch : ransomNote) {
             if (myMap.count(ch) > 0) {
-                -- myMap[ch];
+                myMap[ch] --;
                 if (myMap[ch] == 0) {
                     myMap.erase(ch);
                 }
