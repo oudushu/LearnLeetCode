@@ -12,7 +12,7 @@ private:
             res.push_back(track);
             return;
         }
-        for (int i = index; i < candidates.size(); i ++) {
+        for (int i = index; i < candidates.size(); ++ i) {
             if (target - candidates[i] < 0) {
                 continue;
             }
