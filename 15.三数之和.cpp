@@ -12,18 +12,18 @@ public:
         int n = nums.size();
         if (n == 0) return res;
         sort(nums.begin(), nums.end());
-        for (int i = 0; i < n; i ++) {
+        for (int i = 0; i < n; ++ i) {
             if (i > 0 && nums[i] == nums[i - 1]) {
                 continue;
             }
             int target = -nums[i];
             int k = n - 1;
-            for (int j = i + 1; j < n; j ++) {
+            for (int j = i + 1; j < n; ++ j) {
                 if (j > i + 1 && nums[j] == nums[j - 1]) {
                     continue;
                 }
-                while (k > j && nums[j] + nums[k] > target) {
-                    k --;
+                while (j < k && nums[j] + nums[k] > target) {
+                    -- k;
                 }
                 if (k == j) break;
                 if (nums[j] + nums[k] == target) {
