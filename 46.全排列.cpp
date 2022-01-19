@@ -8,11 +8,11 @@
 class Solution {
 private:
     void trackback(vector<vector<int>> &res, vector<int> &track, vector<int> &nums) {
-        if (track.size() == nums.size()) {
+        if (nums.size() == track.size()) {
             res.push_back(track);
             return;
         }
-        for (int i = 0; i < nums.size(); i ++) {
+        for (int i = 0; i < nums.size(); ++ i) {
             if (find(track.begin(), track.end(), nums[i]) != track.end()) {
                 continue;
             }
