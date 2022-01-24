@@ -11,6 +11,7 @@ public:
         vector<vector<int>> res;
         int n = nums.size();
         if (n == 0) return res;
+        // 排序后双指针
         sort(nums.begin(), nums.end());
         for (int i = 0; i < n; ++ i) {
             if (i > 0 && nums[i] == nums[i - 1]) {
