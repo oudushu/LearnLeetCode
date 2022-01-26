@@ -19,7 +19,7 @@ public:
             }
         }
 
-        vector<int> res(size + 1);
+        vector<int> res(size + 1, 0);
         res[0] = 1;
         return res;
     }
