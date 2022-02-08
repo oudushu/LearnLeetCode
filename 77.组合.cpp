@@ -22,7 +22,8 @@ public:
     vector<vector<int>> combine(int n, int k) {
         vector<vector<int>> res;
         vector<int> track;
-        trackback
+        trackback(res, track, n, k, 1);
+        return res;
     }
 };
 // @lc code=end
