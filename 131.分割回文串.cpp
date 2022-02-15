@@ -7,37 +7,35 @@
 // @lc code=start
 class Solution {
 private:
-    void dfs(string &s, vector<vector<string>> &res, vector<string> &track, int start, vector<vector<int>> &visited) {
+    void dfs(string &s, vector<vector<string>> &res, vector<string> &track, int start) {
         if (start == s.size()) {
             res.push_back(track);
             return;
         }
 
         for (int j = start; j < s.size(); ++ j) {
-            if (isPalindrome(s, visited, start, j) == 1) {
+            if (isPalindrome(s, start, j) == 1) {
                 track.push_back(s.substr(start, j - start + 1));
-                dfs(s, res, track, j + 1, visited);
+                dfs(s, res, track, j + 1);
                 track.pop_back();
             }
         }
     }
 
-    int isPalindrome(string &s, vector<vector<int>> &visited, int i, int j) {
-        if (visited[i][j]) {
-            return visited[i][j];
+    int isPalindrome(string &s, int i, int j) {
+        while (i <= j) {
+            if (s[i] != s[j]) return 0;
+            ++ i;
+            -- j;
         }
-        if (i >= j) {
-            return visited[i][j] = 1;
-        }
-        return visited[i][j] = (s[i] == s[j] ? isPalindrome(s, visited, i + 1, j - 1) : -1);
+        return 1;
     }
 
 public:
     vector<vector<string>> partition(string s) {
         vector<vector<string>> res;
         vector<string> track;
-        vector<vector<int>> visited(s.size(), vector<int>(s.size()));
-        dfs(s, res, track, 0, visited);
+        dfs(s, res, track, 0);
         return res;
     }
 };

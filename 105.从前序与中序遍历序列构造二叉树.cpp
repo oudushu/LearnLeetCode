@@ -25,7 +25,6 @@ private:
         if (inorder_left > inorder_right) return nullptr;
         int root_val = preorder[preorder_index++];
         int inorder_root_index = inorder_index[root_val];
-        int left_count = inorder_root_index - inorder_left;
         TreeNode *root = new TreeNode(root_val);
         root->left = myBuildTree(preorder, inorder, inorder_left, inorder_root_index - 1);
         root->right = myBuildTree(preorder, inorder, inorder_root_index + 1, inorder_right);

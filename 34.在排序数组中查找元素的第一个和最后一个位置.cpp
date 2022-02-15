@@ -29,8 +29,8 @@ private:
         while (left <= right) {
             int mid = left + (right - left) / 2;
             if (nums[mid] > target || (nums[mid] >= target && lower)) {
-                right = mid - 1;
                 res = mid;
+                right = mid - 1;
             } else {
                 left = mid + 1;
             }
