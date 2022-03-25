@@ -8,15 +8,6 @@
 class Solution {
 private:
     void trackback(vector<vector<int>> &res, vector<int> &track, vector<int> &nums, int index) {
-        // if (index == nums.size()) {
-        //     res.push_back(track);
-        //     return;
-        // }
-        // track.push_back(nums[index]);
-        // trackback(res, track, nums, index + 1);
-        // track.pop_back();
-        // trackback(res, track, nums, index + 1);
-
         res.push_back(track);
         for (int i = index; i < nums.size(); i ++) {
             track.push_back(nums[i]);

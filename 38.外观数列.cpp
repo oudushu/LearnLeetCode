@@ -29,3 +29,14 @@ public:
 };
 // @lc code=end
 
+void solve(string str) {
+    string res;
+    for (int i = 0; i < str.size(); ++i) {
+        int start = i;
+        while (i < str.size() && str[i] == str[start]) {
+            ++i;
+        }
+        res += to_string(i - start + 1) + str[start];
+    }
+    return res;
+}

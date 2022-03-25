@@ -20,8 +20,8 @@ private:
     int lengthOfList(ListNode *head) {
         int len = 0;
         while (head) {
-            len ++;
             head = head->next;
+            len ++;
         }
         return len;
     }
