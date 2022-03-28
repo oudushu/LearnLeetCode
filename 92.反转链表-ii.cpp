@@ -71,7 +71,6 @@ private:
 public:
     ListNode* reverseBetween(ListNode* head, int left, int right) {
         ListNode *node = new ListNode(0, head);
-        // ListNode *pre = node;
         ListNode *pre = node;
         ListNode *tail = node;
         for (int i = 1; i < left; ++i) {

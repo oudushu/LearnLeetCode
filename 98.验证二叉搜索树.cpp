@@ -18,13 +18,6 @@
  */
 class Solution {
 private:
-    // bool check(TreeNode *root, TreeNode *leftNode, TreeNode *rightNode) {
-    //     if (!root) return true;
-    //     if (leftNode && root->val <= leftNode->val) return false;
-    //     if (rightNode && root->val >= rightNode->val) return false;
-    //     return check(root->left, leftNode, root) && check(root->right, root, rightNode);
-    // }
-
     bool check(TreeNode *root, TreeNode *leftNode, TreeNode *rightNode) {
         if (!root) return true;
         if (leftNode && leftNode->val >= root->val) return false;
