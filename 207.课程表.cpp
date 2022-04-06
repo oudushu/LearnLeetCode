@@ -5,40 +5,37 @@
  */
 
 // @lc code=start
+#define TODOIT   0
+#define WORKING  1
+#define FINISHED 2
+
 class Solution {
 private:
-    vector<vector<int>> edges;
-    vector<int> visited;
-    bool isValid = true;
-
-    void dfs(int c) {
-        visited[c] = 1;
-        for (int v : edges[c]) {
-            if (visited[v] == 0) {
-                dfs(v);
-                if (!isValid) {
-                    return;
-                } 
-            } else if (visited[v] == 1) {
-                isValid = false;
-                return;
+    bool dfs(vector<vector<int>> &adj, vector<int> &visited, int v) {
+        if (visited[v] == WORKING) return false;
+        if (visited[v] == FINISHED) return true;
+        visited[v] = WORKING;
+        for (int u : adj[v]) {
+            if (!dfs(adj, visited, u)) {
+                return false;
             }
         }
-        visited[c] = 2;
+        visited[v] = FINISHED;
+        return true;
     }
 public:
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
-        edges.resize(numCourses);
-        visited.resize(numCourses);
-        for (const auto &info : prerequisites) {
-            edges[info[1]].push_back(info[0]);
+        vector<int> visited(numCourses, TODOIT);
+        vector<vector<int>> adj(numCourses, vector<int>());
+        for (auto &info : prerequisites) {
+            adj[info[1]].push_back(info[0]);
         }
-        for (int i = 0; i < numCourses && isValid; ++ i) {
-            if (!visited[i]) {
-                dfs(i);
+        for (int i = 0; i < numCourses; ++i) {
+            if (visited[i] == TODOIT && !dfs(adj, visited, i)) {
+                return false;
             }
         }
-        return isValid;
+        return true;
     }
 };
 // @lc code=end
