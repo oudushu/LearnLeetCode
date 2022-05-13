@@ -10,14 +10,12 @@ public:
     int lengthOfLastWord(string s) {
         if (s.empty()) return 0;
         int right = s.size() - 1;
-        while (right >= 0) {
-            if (s[right] != ' ') break;
-            right --;
+        while (right >= 0 && s[right] == ' ') {
+            --right;
         }
         int left = right;
-        while (left >= 0) {
-            if (s[left] == ' ') break;
-            left --;
+        while (left >= 0 && s[left] != ' ') {
+            --left;
         }
         return right - left;
     }
