@@ -7,45 +7,38 @@
 // @lc code=start
 class Solution {
 private:
-    vector<vector<int>> edges;
-    vector<int> visited;
-    vector<int> result;
-    bool isValid = true;
+    const int TODO = 0;
+    const int WORKING = 1;
+    const int DONE = 2;
 
-    void dfs(int u) {
-        visited[u] = 1;
-        for (int v : edges[u]) {
-            if (visited[v] == 0) {
-                dfs(v);
-                if (!isValid) {
-                    return;
-                }
-            } else if (visited[v] == 1) {
-                isValid = false;
-                return;
+    bool dfs(int n, vector<int>& res, vector<vector<int>>& edge, vector<int>& visited) {
+        if (visited[n] == WORKING) return false;
+        if (visited[n] == DONE) return true;
+        visited[n] = WORKING;
+        for (int i : edge[n]) {
+            if (!dfs(i, res, edge,visited)) {
+                return false;
             }
         }
-        visited[u] = 2;
-        result.push_back(u);
+        visited[n] = DONE;
+        res.push_back(n);
+        return true;
     }
-
 public:
     vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
-        edges.resize(numCourses);
-        visited.resize(numCourses);
-        for (const auto &info : prerequisites) {
-            edges[info[1]].push_back(info[0]);
+        vector<int> visited(numCourses, TODO);
+        vector<vector<int>> edge(numCourses, vector<int>());
+        vector<int> res;
+        for (auto& info : prerequisites) {
+            edge[info[1]].push_back(info[0]);
         }
-        for (int i = 0; i < numCourses && isValid; ++ i) {
-            if (!visited[i]) {
-                dfs(i);
+        for (int i = 0; i < numCourses; ++i) {
+            if (visited[i] == TODO && !dfs(i, res, edge, visited)) {
+                return {};
             }
         }
-        if (!isValid) {
-            return {};
-        }
-        reverse(result.begin(), result.end());
-        return result;
+        reverse(res.begin(), res.end());
+        return res;
     }
 };
 // @lc code=end
