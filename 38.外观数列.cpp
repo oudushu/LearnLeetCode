@@ -45,7 +45,7 @@ public:
 };
 // @lc code=end
 
-void solve(string str) {
+string solve(string str) {
     string res;
     for (int i = 0; i < str.size(); ++i) {
         int start = i;

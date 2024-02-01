@@ -7,50 +7,45 @@
 // @lc code=start
 class Solution {
 private:
-    int const segmentCount = 4;
-
-    void dfs(vector<string> &res, vector<int> &segment, string &s, int count, int start) {
-        if (segmentCount == count) {
-            if (start == s.size()) {
-                string ipAddr;
-                for (int i = 0; i < segmentCount; ++ i) {
-                    ipAddr += to_string(segment[i]);
-                    if (i != segmentCount - 1) {
-                        ipAddr += '.';
-                    }
+    const int kCount = 4;
+    void trackback(vector<string>& res, vector<int>& track, string& s, int index) {
+        if (track.size() == kCount) {
+            if (s.size() == index) {
+                string str;
+                for (int i : track) {
+                    str += to_string(i) + '.';
                 }
-                res.push_back(ipAddr);
+                str.pop_back();
+                res.push_back(str);
             }
             return;
         }
+        if (index == s.size()) return;
 
-        if (start == s.size()) {
-            return;
-        }
-
-        if (s[start] == '0') {
-            segment[count] = 0;
-            dfs(res, segment, s, count + 1, start + 1);
+        if (s[index] == '0') {
+            track.push_back(0);
+            trackback(res, track, s, index + 1);
+            track.pop_back();
             return;
         }
 
         int addr = 0;
-        for (int i = start; i < s.size(); ++ i) {
+        for (int i = index; i < s.size(); ++i) {
             addr = addr * 10 + (s[i] - '0');
             if (addr > 0 && addr <= 0xFF) {
-                segment[count] = addr;
-                dfs(res, segment, s, count + 1, i + 1);
+                track.push_back(addr);
+                trackback(res, track, s, i + 1);
+                track.pop_back();
             } else {
                 break;
             }
         }
     }
-
 public:
     vector<string> restoreIpAddresses(string s) {
-        vector<int> segment(segmentCount, 0);
         vector<string> res;
-        dfs(res, segment, s, 0, 0);
+        vector<int> track;
+        trackback(res, track, s, 0);
         return res;
     }
 };
